@@ -59,7 +59,7 @@ def main():
     # 워드 클라우드     
     from PIL import Image
     import numpy as np
-    im = Image.open('C:\\Users\\user\\Desktop\\heart.png')
+    im = Image.open("C:\heart.png")
     mask_arr = np.array(im)
     wordcloud = WordCloud(
         font_path="C:/Windows/Fonts/Malgun.ttf",
