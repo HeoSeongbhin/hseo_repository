@@ -18,21 +18,21 @@ def global_weather():
     날씨 = weather.text.split(" ")
     info1 = soup.find(class_="temperature_info")
     정보 = info1.text.split(" ")
-
+    
     print("위치:",위치[0],위치[1])
     print(날씨[1],날씨[2])
-    if len(날씨)==8: //ex)대체로 화창
+    if len(날씨)==8:
         print("날씨:",날씨[3],날씨[4],"\n"+"체감온도:",날씨[6])
-    elif len(날씨)==7: //ex)맑음
+    elif len(날씨)==7:
         print("날씨:",날씨[3],"\n"+"체감온도:",날씨[5])
     print("현지시간:",정보[3],정보[4])
-    if(len(정보)==17): //ex)자외선 정보의 유무
+    if(len(정보)==17):
         print("자외선:",정보[6])
         print("강수량:",정보[10],"\n"+"습도:",정보[12])
-        print("풍향",정보[13],정보[14])
+        print("풍속:",정보[13],정보[14])
     elif(len(정보)==15):
         print("강수량:",정보[8],"\n"+"습도:",정보[10])
-        print("풍향",정보[11],정보[12])
+        print("풍속:",정보[11],정보[12])
 
 def Korean_weather():
     location = soup.find(class_="title_area _area_panel") 
