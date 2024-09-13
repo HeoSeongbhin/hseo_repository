@@ -55,12 +55,11 @@ def Korean_weather():
     print("체감온도:",상세정보[10],"/","습도:",상세정보[14])
     print("풍속:",상세정보[17],상세정보[18])
 
-test = soup.find(class_="provider _provider")
-test2 = test.text.split(" ")
-if test2[0]=="아큐웨더":
+admin = soup.find(class_="multi_cp_area")
+제공 = admin.text.split(" ")
+
+if 제공[6]=="아큐웨더" or 제공[6]=="웨더뉴스":
     global_weather()
-elif test2[0]=="기상청":
+else:
     Korean_weather()
-elif test2[0]=="웨더뉴스":
-    global_weather()
     
