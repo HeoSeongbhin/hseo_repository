@@ -35,16 +35,16 @@ def global_weather():
         print("풍향",정보[11],정보[12])
 
 def Korean_weather():
-    temperature = soup.find(class_="title_area _area_panel") 
+    location = soup.find(class_="title_area _area_panel") 
     # 특정 클래스를 가진 요소들의 텍스트를 추출
-    위치 = temperature.text.split(" ")
+    위치 = location.text.split(" ")
     #  //추출 텍스트를 공백기준으로 나눠 리스트 저장(각각의 변수에 저장)
-    temperature = soup.find(class_="weather_graphic") 
-    날씨 = temperature.text.split(" ") 
-    temperature = soup.find(class_="today_chart_list") 
-    대기질 = temperature.text.split(" ") 
-    temperature = soup.find(class_="temperature_info") 
-    상세정보 = temperature.text.split(" ")
+    weather = soup.find(class_="weather_graphic") 
+    날씨 = weather.text.split(" ") 
+    atmosphere = soup.find(class_="today_chart_list") 
+    대기질 = atmosphere.text.split(" ") 
+    info = soup.find(class_="temperature_info") 
+    상세정보 = info.text.split(" ")
     
     print("위치:",위치[1],위치[2])
     print("날씨:",날씨[2],"\n"+날씨[5],날씨[6])
