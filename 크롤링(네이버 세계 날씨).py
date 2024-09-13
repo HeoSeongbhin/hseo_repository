@@ -12,55 +12,48 @@ html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 
 def global_weather():
-    temperature = soup.find(class_="title_area")
-    위치 = temperature.text.split(" ")
-    if len(위치)==20:
-        print("위치:",위치[1])
-    elif len(위치)!=20:
-        print("위치:",위치[1],위치[2])
+    location = soup.find(class_="title")
+    위치 = location.text.split(" ")
+    weather = soup.find(class_="temperature_text")
+    날씨 = weather.text.split(" ")
+    info1 = soup.find(class_="temperature_info")
+    정보 = info1.text.split(" ")
 
-    temperature = soup.find(class_="weather_graphic")
-    날씨 = temperature.text.split(" ")
-    print("날씨:",날씨[2],날씨[3])
-
-    temperature = soup.find(class_="temperature_text")
-    현재 = temperature.text.split(" ")
-
-    if len(현재)==8:
-        print(현재[1],현재[2],"\n"+현재[5]+":",현재[6])
-    elif len(현재)==7:
-        print(현재[1],현재[2],"\n"+현재[4]+":",현재[5])
-
-    temperature = soup.find(class_="temperature_info")
-    상세 = temperature.text.split(" ")
-
-    if len(상세)==15:
-        print(상세[2]+":",상세[3],상세[4],"\n"+상세[7]+":",상세[8])
-        print(상세[9]+":",상세[10],"\n"+"풍향:",상세[11],상세[12])
-    elif len(상세)==17:
-        print(상세[2]+":",상세[3],상세[4],"\n"+상세[5]+":",상세[6])
-        print(상세[9]+":",상세[10],"\n"+상세[11]+":",상세[12],"\n"+"풍향:",상세[13],상세[14])
+    print("위치:",위치[0],위치[1])
+    print(날씨[1],날씨[2])
+    if len(날씨)==8: //ex)대체로 화창
+        print("날씨:",날씨[3],날씨[4],"\n"+"체감온도:",날씨[6])
+    elif len(날씨)==7: //ex)맑음
+        print("날씨:",날씨[3],"\n"+"체감온도:",날씨[5])
+    print("현지시간:",정보[3],정보[4])
+    if(len(정보)==17): //ex)자외선 정보의 유무
+        print("자외선:",정보[6])
+        print("강수량:",정보[10],"\n"+"습도:",정보[12])
+        print("풍향",정보[13],정보[14])
+    elif(len(정보)==15):
+        print("강수량:",정보[8],"\n"+"습도:",정보[10])
+        print("풍향",정보[11],정보[12])
 
 def Korean_weather():
-    temperature = soup.find(class_="title_area _area_panel")
+    temperature = soup.find(class_="title_area _area_panel") 
+    # 특정 클래스를 가진 요소들의 텍스트를 추출
     위치 = temperature.text.split(" ")
-    print("위치:",위치[1],위치[2])
-
-    temperature = soup.find(class_="weather_graphic")
-    날씨 = temperature.text.split(" ")
-    
-    if len(날씨)==9:
-        print("날씨:",날씨[2],"\n"+날씨[5],날씨[6])
-    elif len(날씨)==10:
-        print("날씨:",날씨[2],날씨[3],"\n"+날씨[6],날씨[7])
-    
-    temperature = soup.find(class_="today_chart_list")
-    대기질 = temperature.text.split(" ")
-    print("대기질:",대기질[3],대기질[4],"/",대기질[9],대기질[10],"/",대기질[15],대기질[16],"\n"+대기질[21]+":",대기질[22])
-
-    temperature = soup.find(class_="temperature_info")
+    #  //추출 텍스트를 공백기준으로 나눠 리스트 저장(각각의 변수에 저장)
+    temperature = soup.find(class_="weather_graphic") 
+    날씨 = temperature.text.split(" ") 
+    temperature = soup.find(class_="today_chart_list") 
+    대기질 = temperature.text.split(" ") 
+    temperature = soup.find(class_="temperature_info") 
     상세정보 = temperature.text.split(" ")
-    print("일교차:",상세정보[1],상세정보[2],상세정보[3],상세정보[4],"\n"+상세정보[9]+':',상세정보[10],"/",상세정보[13]+':',상세정보[14],"\n"+상세정보[17],상세정보[18])
+    
+    print("위치:",위치[1],위치[2])
+    print("날씨:",날씨[2],"\n"+날씨[5],날씨[6])
+    print("대기질:",대기질[3],대기질[4],"/",대기질[9],대기질[10]
+    ,"/",대기질[15],대기질[16])
+    print("일출:",대기질[22]) 
+    print("일교차:",상세정보[1],상세정보[2],상세정보[3],상세정보[4]) 
+    print("체감온도:",상세정보[10],"/","습도:",상세정보[14])
+    print("풍속:",상세정보[17],상세정보[18])
 
 test = soup.find(class_="provider _provider")
 test2 = test.text.split(" ")
